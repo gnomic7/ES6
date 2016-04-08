@@ -1,0 +1,71 @@
+Arrow function could use the scope where it is called from...
+  var x = {
+    y: 123,
+    test: function() {
+      return this.y;
+    }
+  };
+
+  x.test();//returns 123
+
+  
+  var x = {
+    y: 123,
+    test: () => this,
+    test2: function() {
+      return this;
+    }
+  };
+
+  x.test()//Window
+  x.test2() //Object x
+
+  z = {
+    y: 456
+  };
+
+  x.test().bind(z)//Be careful, this will result 123
+  //Fat arrow is useless with call|apply|bind :(
+  //We don't have access to prototype for fat arrow function
+
+var getTax = function (price, tax = price * 0.08) {
+  return tax;
+}
+getTax(500);
+
+var testArgs = function(x = 10, y = x * 2) {
+  return [x, y, arguments.length];
+}
+
+testArgs(5);//returns [5, 10, 1] :(
+
+Spread (spreads array to individual values) and Rest (joins individual values to an array) operators
+
+Dynamic key in an object
+let x = 'name';
+let person = {
+  [x]: 'some name'
+}
+
+//Very interesting es6
+var i = 0, method = 'testIt';
+var Employee = {
+  [x + i]: 'my name' + i++,
+  [method]() {
+    return i
+  }
+}
+
+//Another quite interesting
+let cats = 'ABCDE';
+for (cat of cats) {
+  console.log(cat)
+}
+
+//String literals
+function processItem(segments, ...values) {
+  console.debug(segments, values);
+}
+
+let num = 10, amount = 50.00;
+processItem `There are ${num} items for ${amount}`;
