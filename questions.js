@@ -83,3 +83,35 @@ const gutherieIndex = (n) => {
 };
 
 console.log('Gutherie Index of 3: ', gutherieIndex(3));
+/** Question 3 Centered-15 */
+const isCentered15 = (numbers) => {
+  const median = Math.floor(numbers.length/2);
+  let sum = numbers[median];
+  const isCountEven = numbers.length % 2 === 0;
+  if (sum === 15) {
+    if (!isCountEven) {
+      return 1;
+    }
+  }
+  for (let x = 1, y = median; x <= median; x++) {
+    sum += numbers[median - x];
+    if (sum !== 15) {
+      sum += numbers[++y];
+    }
+    console.log(sum, '=', ((numbers.length - 1) - y), '=', (median - x));
+    if (sum === 15 && ((numbers.length - 1) - y) === (median - x)) {
+      return 1;
+    }
+  }
+  return 0;
+};
+
+console.log('Is Centered 15 [3, 2, 10, 4, 1, 6, 9]: ', isCentered15([3, 2, 10, 4, 1, 6, 9]));
+
+console.log('Is Centered 15 [3, 2, 15, 6, 9]: ', isCentered15([3, 2, 15, 6, 9]));
+
+console.log('Is Centered 15 [0,3, 2, 15, 6, 9, 4]: ', isCentered15([0,3, 2, 15, 6, 9, 4]));
+
+console.log('Is Centered 15 [3, 2,0, 1,5,4,5, 6, 9, 4]: ', isCentered15([3, 2,0, 1,5,4,5, 6, 9, 4]));
+
+console.log('Is Centered 15 [3, 2,0, 1,5,4,5, 6, 4, 4, 1,2,4,5,6]: ', isCentered15([3, 2,0, 1,5,4,5, 6, 4, 4, 1,2,4,5,6]));
